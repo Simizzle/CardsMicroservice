@@ -1,6 +1,7 @@
 package com.simonmorgan.cards.controller;
 
 import com.simonmorgan.cards.constants.CardsConstants;
+import com.simonmorgan.cards.dto.CardsContactInfoDto;
 import com.simonmorgan.cards.dto.CardsDto;
 import com.simonmorgan.cards.dto.ErrorResponseDto;
 import com.simonmorgan.cards.dto.ResponseDto;
@@ -42,6 +43,9 @@ public class CardsController {
 
     @Autowired
     private Environment environment;
+
+    @Autowired
+    CardsContactInfoDto cardsContactInfoDto;
 
 
     @Operation(
@@ -214,5 +218,29 @@ public class CardsController {
     public ResponseEntity<String> getJavaVersion() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(environment.getProperty("JAVA_HOME"));
+    }
+
+    @Operation(
+            summary = "Get contact info",
+            description = "Contact info details that can be reached in case of any issues"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @
+                            Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/contact-info")
+    public ResponseEntity<CardsContactInfoDto> getContactInfo() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(cardsContactInfoDto);
     }
 }
