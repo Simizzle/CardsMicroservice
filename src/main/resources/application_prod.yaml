@@ -6,7 +6,7 @@ spring:
 build:
   version: "1.0"
 
-accounts:
+cards:
   message: "Welcome to EazyBank cards related prod APIs "
   contactDetails:
     name: "Simon Morgan - Product Owner"

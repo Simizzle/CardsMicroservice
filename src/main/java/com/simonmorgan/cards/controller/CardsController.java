@@ -47,7 +47,6 @@ public class CardsController {
     @Autowired
     CardsContactInfoDto cardsContactInfoDto;
 
-
     @Operation(
             summary = "Create Card REST API",
             description = "REST API to create new Card inside EazyBank"
